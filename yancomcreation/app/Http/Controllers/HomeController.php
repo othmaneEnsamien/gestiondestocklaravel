@@ -37,6 +37,7 @@ class HomeController extends Controller
 
     public function userRolesPermissionsChart()
     {
+        $productsOutOfStock = Produit::where('mesure', '<=', 10)->paginate(3);
         $totalCommandes = Commande::count();
         $totalClients = Client::count();
         $newCommandesToday = Commande::whereDate('created_at', Carbon::today())->count();
@@ -94,6 +95,6 @@ class HomeController extends Controller
         }
 
 
-        return view('home', compact('expenses', 'income', 'topProducts', 'topClients', 'maxCommandesProduits', 'maxCommandes', 'rolesCount', 'permissionsCount', 'totalCommandes', 'totalClients', 'newCommandesToday', 'revenuMensuel', 'labels', 'data'));
+        return view('home', compact('expenses', 'productsOutOfStock', 'income', 'topProducts', 'topClients', 'maxCommandesProduits', 'maxCommandes', 'rolesCount', 'permissionsCount', 'totalCommandes', 'totalClients', 'newCommandesToday', 'revenuMensuel', 'labels', 'data'));
     }
 }

@@ -78,6 +78,8 @@ Route::get('/getProductQuantity/{produitId}', [CommandeController::class, 'getPr
 // Route pour enregistrer la commande
 Route::post('/saveCommande', [CommandeController::class, 'addCommande'])->name('commande.save');
 
+
+
 Route::post('/commande/update-etat', [CommandeController::class, 'updateEtat'])->name('commande.update-etat');
 
 

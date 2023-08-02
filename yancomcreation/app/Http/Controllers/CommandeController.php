@@ -85,7 +85,8 @@ class CommandeController extends Controller
             return redirect()->back()->with('error', 'Les produits et les quantités ne correspondent pas.');
         }
 
-        // Parcourez les produits et les quantités associées
+        $invalidQuantities = [];
+
         for ($i = 0; $i < count($produitsIds); $i++) {
             $produitId = $produitsIds[$i];
             $quantite = $quantites[$i];
@@ -97,17 +98,28 @@ class CommandeController extends Controller
 
                 // Vérifiez si la quantité saisie est supérieure à la quantité disponible
                 if ($quantite > $quantiteDisponible) {
-                    throw new \Exception('La quantité saisie dépasse la quantité disponible du produit.');
+                    // Ajoutez l'ID du produit à la liste des quantités invalides
+                    $invalidQuantities[] = $produitId;
+                } else {
+                    // Ajoutez la relation entre la commande et le produit avec la quantité associée
+                    $commande->produits()->attach($produitId, ['quantite' => $quantite]);
+                    // Mettez à jour la quantité disponible du produit en soustrayant la quantité commandée
+                    $produit->mesure -= $quantite;
+                    $produit->save();
                 }
-
-                // Ajoutez la relation entre la commande et le produit avec la quantité associée
-                $commande->produits()->attach($produitId, ['quantite' => $quantite]);
-                // Mettez à jour la quantité disponible du produit en soustrayant la quantité commandée
-                $produit->mesure -= $quantite;
-                $produit->save();
             } else {
                 return redirect()->back()->with('error', 'Produit non trouvé.');
             }
+        }
+
+        // Vérifiez s'il y a des quantités invalides, si oui, supprimez la commande et les associations avec les produits
+        if (!empty($invalidQuantities)) {
+            // Supprimez la commande et les associations avec les produits
+            $commande->produits()->detach($invalidQuantities);
+            $commande->delete();
+
+            // Redirigez l'utilisateur avec un message d'erreur
+            return redirect()->back()->with('error', 'La quantité saisie dépasse la quantité disponible pour certains produits. La commande a été supprimée.');
         }
 
         // Retournez une réponse indiquant que la commande a été ajoutée avec succès

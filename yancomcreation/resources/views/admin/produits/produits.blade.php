@@ -116,8 +116,16 @@
                                                                 </select>
 
                                                             </div>
-
                                                             <div class="form-group">
+                                                                <label for="id_souscategorie">Sous-catégorie</label>
+                                                                <select class="form-control" id="id_souscategorie_edit"
+                                                                    name="id_souscategorie_edit" required disabled>
+                                                                    <option value="0">Sélectionnez une catégorie
+                                                                        d'abord</option>
+                                                                </select>
+                                                            </div>
+
+                                                            {{-- <div class="form-group">
                                                                 <label for="id_souscategorie">Sous-catégorie:</label>
                                                                 <select name="id_souscategorie" id="id_souscategorie"
                                                                     class="form-control">
@@ -128,7 +136,7 @@
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
-                                                            </div>
+                                                            </div> --}}
 
 
                                                             <div class="form-group">
@@ -251,7 +259,7 @@
                                 <option value="">Sélectionnez une catégorie d'abord</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="id_souscategorie">Sous-catégorie:</label>
                             <select name="id_souscategorie" id="id_souscategorie" class="form-control">
                                 @foreach ($souscategories as $souscategorie)
@@ -261,7 +269,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -360,7 +368,7 @@
 <script>
     // You can use the same function for loading subcategories in the edit modal as well
     function loadEditSousCategories(categorieId, selectedSousCategorieId) {
-        var sousCategorieSelect = $('#id_souscategorie');
+        var sousCategorieSelect = $('#id_souscategorie_edit');
         sousCategorieSelect.html('<option value="">Chargement...</option>');
 
         // Effectuez une requête Ajax pour récupérer les sous-catégories associées à la catégorie sélectionnée

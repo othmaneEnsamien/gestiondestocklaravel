@@ -59,9 +59,14 @@
                     </tbody>
 
                 </table>
-                {{ $clients->links('vendor.pagination.bootstrap-4') }}
+
             </div>
 
+
+
+        </div>
+        <div class="pagination m-2">
+            {{ $clients->links('vendor.pagination.bootstrap-4') }}
         </div>
 
     </div>

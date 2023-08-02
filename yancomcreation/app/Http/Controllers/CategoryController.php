@@ -28,7 +28,7 @@ class CategoryController extends Controller
         ]);
 
         // return redirect()->back()->with('success', 'Category created successfully.');
-        return response()->json('category added');
+        return redirect()->back()->with('success', 'category added succesfuly');
     }
 
     // CategoryController.php
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         }
 
         // return redirect()->back()->with('success', 'Sub-category created successfully.');
-        return response()->json('Sub-category created successfully.', 201);
+        return redirect()->back()->with('success', 'Sub-category created successfully');
     }
 
 

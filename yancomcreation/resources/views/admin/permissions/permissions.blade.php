@@ -63,9 +63,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="pagination">
-                    {{ $permissions->links('vendor.pagination.bootstrap-4') }}
-                </div>
+
+            </div>
+            <div class="pagination m-2">
+                {{ $permissions->links('vendor.pagination.bootstrap-4') }}
             </div>
         </div>
     </div>

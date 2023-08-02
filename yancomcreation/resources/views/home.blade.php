@@ -141,7 +141,7 @@
 
         <div class="row">
             <!-- Tableau des 5 meilleurs clients -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h4>Top 5 Clients</h4>
@@ -180,12 +180,13 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
 
             <!-- Tableau des 5 meilleurs produits -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h4>Top 5 Produits</h4>
@@ -219,14 +220,53 @@
                                                     <div>{{ $produit->commandes_count }}</div>
                                                 </div>
                                             </td>
+
                                         </tr>
                                     @endforeach
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h4>Produits presque en rupture de stock</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom du produit</th>
+                                        <th>Quantité en stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($productsOutOfStock as $index => $product)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $product->nomproduit }}</td>
+                                            <td>{{ $product->mesure }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Aucun produit en rupture de stock</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

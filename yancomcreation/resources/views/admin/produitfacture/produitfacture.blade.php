@@ -288,12 +288,18 @@
                         $('#productsTable tbody').append(newRow);
                         toastr.success('Le produit a été ajouté avec succès.');
                     },
+                    handleSuccessUpdate();
                     error: function() {
                         toastr.success('Le produit est non ajoute .');
                     }
                 });
             });
         });
+
+        function handleSuccessUpdate() {
+            // Reload the current page
+            location.reload();
+        }
 
         // Handle the click event on the "Edit Product" button
         $(document).on('click', '.edit-product-btn', function() {

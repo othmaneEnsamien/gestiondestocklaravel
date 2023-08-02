@@ -250,13 +250,23 @@
                                             <option value="0">Choisissez</option>
                                         </select>
                                     </div>
+
+
                                     <div class="form-row" id="quantityRow" style="display: none;">
                                         <div class="form-group col-md-6">
                                             <label>Quantité</label>
                                             <input type="number" class="form-control" name="quantite" min="1"
                                                 aria-invalid="false">
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Quantité disponible</label>
+                                            <span class="quantity-available">0</span>
+                                        </div>
                                     </div>
+
+
+
+
                                 </div>
                                 <div id="ProductsForm"></div>
                             </fieldset>
@@ -265,10 +275,7 @@
                         </form>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-success" id="submitBtn">Ajouter</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -326,6 +333,23 @@
                         console.log(xhr.responseText);
                     }
                 });
+            });
+        });
+
+        $('#listProduct').on('change', function() {
+            var produitId = $(this).val();
+
+            // Faites une requête AJAX pour obtenir la quantité disponible pour le produit sélectionné
+            $.ajax({
+                url: '/getProductQuantity/' + produitId,
+                type: 'GET',
+                success: function(response) {
+                    // Affichez la quantité disponible à côté du champ de quantité
+                    $('.quantity-available').text('Quantité disponible : ' + response.quantity);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
             });
         });
     </script>

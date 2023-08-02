@@ -268,7 +268,7 @@
                     </div>
 
 
-                    <div class="pagination">
+                    <div class="pagination m-2">
                         {{ $roles->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
